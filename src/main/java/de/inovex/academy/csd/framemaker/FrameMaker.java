@@ -32,7 +32,7 @@ public class FrameMaker {
 	}
 
 	private String generateBodyLine(String line, int maxLineLength) {
-		String rightPadLine = StringUtils.rightPad(line, maxLineLength, "");
+		String rightPadLine = StringUtils.rightPad(line, maxLineLength);
 		return BORDER_CHAR + rightPadLine + BORDER_CHAR;
 	}
 

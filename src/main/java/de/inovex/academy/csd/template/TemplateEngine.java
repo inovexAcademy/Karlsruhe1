@@ -1,7 +1,10 @@
 package de.inovex.academy.csd.template;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class TemplateEngine {
 
@@ -12,10 +15,40 @@ public class TemplateEngine {
 	}
 
 	public String render(Map<String, String> values) {
-		if(!values.isEmpty()) {
+		
+		if (!CheckValues(values)) {
 			throw new IllegalArgumentException();
+		} 
+		
+		String result = template;
+		for (String key : values.keySet()) {
+			result = StringUtils.replace(result, buildPlaceholder(key), values.get(key));
 		}
-		return template;
+		return result;
 	}
+
+	private boolean CheckValues(Map<String, String> values) {
+		List<String> keyList = new ArrayList<>(values.keySet());
+		return keyList.isEmpty() || templateContainsPlaceholder(keyList.get(0));
+	}
+
+	private String buildPlaceholder(String firstElement) {
+		return "${" + firstElement + "}";
+	}
+
+	private boolean templateContainsPlaceholder(String placeholderName) {
+		return template.contains(buildPlaceholder(placeholderName));
+	}
+
+	// private boolean doesMatchPlaceholders(Map<String, String> values) {
+	// for (String key : values.keySet()) {
+	// if(!template.contains("${"+key+"}")) {
+	// return false;
+	// }
+	// }
+	//
+	//
+	// return true;
+	// }
 
 }
