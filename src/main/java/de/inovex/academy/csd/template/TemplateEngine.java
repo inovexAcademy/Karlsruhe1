@@ -29,7 +29,12 @@ public class TemplateEngine {
 
 	private boolean CheckValues(Map<String, String> values) {
 		List<String> keyList = new ArrayList<>(values.keySet());
-		return keyList.isEmpty() || templateContainsPlaceholder(keyList.get(0));
+		boolean check = true;
+		for(String key : keyList) {
+			check &= templateContainsPlaceholder(key);			
+		}
+		
+		return check;
 	}
 
 	private String buildPlaceholder(String firstElement) {

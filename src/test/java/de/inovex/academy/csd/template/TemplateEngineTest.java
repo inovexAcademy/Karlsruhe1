@@ -30,6 +30,16 @@ public class TemplateEngineTest {
 		template.render(values);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testTemplateEngineWithoutSecondMatchingPlaceholder() {
+		TemplateEngine template = new TemplateEngine("Hallo ${name}");
+		HashMap<String, String> values = new HashMap<String, String>();
+		values.put("name", "Klaus");
+		values.put("lastname", "Beimer");		
+		
+		template.render(values);
+	}
+	
 	@Test
 	public void testTemplateEngineWithOnePlaceholder() {
 		TemplateEngine template = new TemplateEngine("Hallo ${name}");
