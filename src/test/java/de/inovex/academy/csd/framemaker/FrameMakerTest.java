@@ -30,4 +30,10 @@ public class FrameMakerTest {
 		FrameMaker maker = new FrameMaker();
 		assertThat(maker.makeFrame(asList("hello")), equalTo(asList("*******","*hello*","*******")));
 	}
+	
+	@Test
+	public void testFrameMakerWithMultiLines() {
+		FrameMaker maker = new FrameMaker();
+		assertThat(maker.makeFrame(asList("hello", "world")), equalTo(asList("*******","*hello*","*world*","*******")));
+	}
 }
