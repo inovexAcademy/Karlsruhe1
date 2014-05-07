@@ -18,8 +18,7 @@ public class FrameMakerTest {
 
 	@Test
 	public void testFrameMakerWithSingleLetter() {
-		
-		FrameMaker maker = new FrameMaker();
+				FrameMaker maker = new FrameMaker();
 		
 		assertThat(maker.makeFrame(asList("x")), equalTo(asList("***","*x*","***")));
 		assertThat(maker.makeFrame(asList("y")), equalTo(asList("***","*y*","***")));
@@ -35,5 +34,11 @@ public class FrameMakerTest {
 	public void testFrameMakerWithMultiLines() {
 		FrameMaker maker = new FrameMaker();
 		assertThat(maker.makeFrame(asList("hello", "world")), equalTo(asList("*******","*hello*","*world*","*******")));
+	}
+	
+	@Test
+	public void testFrameMakerWithMultiLinesAndDifferentLength() {
+		FrameMaker maker = new FrameMaker();
+		assertThat(maker.makeFrame(asList("hello", "world!!!")), equalTo(asList("**********","*hello   *","*world!!!*","**********")));
 	}
 }

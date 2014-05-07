@@ -1,7 +1,5 @@
 package de.inovex.academy.csd.framemaker;
 
-import static java.util.Arrays.asList;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +22,31 @@ public class FrameMaker {
 	}
 
 	private List<String> generateBody(List<String> textList) {
+		int maxLineLength = getMaxLineLength(textList);
+		
 		List<String> body = new ArrayList<>();
 		for(String line : textList) {
-			body.add(BORDER_CHAR + line + BORDER_CHAR);
+			body.add(generateBodyLine(line, maxLineLength));
 		}
 		return body;
 	}
 
+	private String generateBodyLine(String line, int maxLineLength) {
+		String rightPadLine = StringUtils.rightPad(line, maxLineLength, "");
+		return BORDER_CHAR + rightPadLine + BORDER_CHAR;
+	}
+
 	private String generateBorderLine(List<String> textList) {
-		return StringUtils.repeat(BORDER_CHAR, textList.get(0).length() + LINE_FRAME_WIDTH);
+		return StringUtils.repeat(BORDER_CHAR, getMaxLineLength(textList) + LINE_FRAME_WIDTH);
+	}
+
+	private int getMaxLineLength(List<String> textList) {
+		int maxLength = 0;
+		for (String line : textList) {
+			maxLength = Math.max(maxLength, line.length());
+		}
+		
+		return maxLength;
 	}
 
 }
