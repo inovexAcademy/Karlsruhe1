@@ -16,7 +16,7 @@ public class TemplateEngine {
 
 	public String render(Map<String, String> values) {
 		
-		if (!CheckValues(values)) {
+		if (!checkValues(values)) {
 			throw new IllegalArgumentException();
 		} 
 		
@@ -27,7 +27,7 @@ public class TemplateEngine {
 		return result;
 	}
 
-	private boolean CheckValues(Map<String, String> values) {
+	private boolean checkValues(Map<String, String> values) {
 		List<String> keyList = new ArrayList<>(values.keySet());
 		boolean check = true;
 		for(String key : keyList) {
